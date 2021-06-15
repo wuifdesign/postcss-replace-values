@@ -1,0 +1,36 @@
+{
+  "name": "postcss-replace-values",
+  "version": "0.0.1",
+  "description": "A PostCSS plugin to replace one color with another",
+  "main": "dist/index.js",
+  "source": "lib/index.ts",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/*",
+    "lib/*"
+  ],
+  "scripts": {
+    "build": "tsc lib/index.ts --declaration --outDir dist --skipLibCheck",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:wuifdesign/postcss-replace-values.git"
+  },
+  "keywords": [
+    "postcss",
+    "color",
+    "replace"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/wuifdesign/postcss-replace-values",
+  "dependencies": {
+    "postcss": "^7.0.36"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.2"
+  }
+}
