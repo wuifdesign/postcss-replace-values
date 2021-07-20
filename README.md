@@ -13,7 +13,7 @@ const postcss = require('postcss');
 const replaceValuesPlugin = require('postcss-replace-values').default;
 
 postcss()
-  .use(alterColorPlugin({ 
+  .use(replaceValuesPlugin({ 
     values: {
       '#000': '#a00'
     }
@@ -45,7 +45,7 @@ const postcss = require('postcss');
 const replaceValuesPlugin = require('postcss-replace-values').default;
 
 postcss()
-  .use(alterColorPlugin({ 
+  .use(replaceValuesPlugin({ 
     values: {
       '#000': { value: '#a00', selector: /btn/ }
     }
