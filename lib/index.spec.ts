@@ -31,3 +31,9 @@ it('should replace for selector regex', async () => {
   const checkValue = await process(source, { values: { '#000': { value: '#a00', selector: /btn/ } } });
   expect(checkValue).toBe('div { color: #000; } .btn { color: #a00 }');
 });
+
+it('should not replace css variable', async () => {
+  const source = 'div { --primary: #000; } .btn { color: #000 }';
+  const checkValue = await process(source, { values: { '#000': '#a00' } });
+  expect(checkValue).toBe('div { --primary: #000; } .btn { color: #a00 }');
+});
