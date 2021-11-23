@@ -1,6 +1,6 @@
 {
   "name": "postcss-replace-values",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A PostCSS plugin to replace one color with another",
   "main": "dist/index.js",
   "source": "lib/index.ts",
@@ -25,7 +25,9 @@
   "license": "MIT",
   "homepage": "https://github.com/wuifdesign/postcss-replace-values",
   "dependencies": {
-    "postcss": "^7.0.36"
+    "color-shorthand-hex-to-six-digit": "^4.0.6",
+    "postcss": "^7.0.36",
+    "string.prototype.replaceall": "^1.0.6"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",

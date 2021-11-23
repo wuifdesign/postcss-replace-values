@@ -3,14 +3,14 @@
 ## Install
 
 ```
-npm install --save https://github.com/wuifdesign/postcss-replace-values
+npm install --save postcss-replace-values
 ```
 
 ## Simple Usage
 
 ```js
 const postcss = require('postcss');
-const replaceValuesPlugin = require('postcss-replace-values').default;
+const replaceValuesPlugin = require('postcss-replace-values');
 
 postcss()
   .use(replaceValuesPlugin({ 
@@ -42,7 +42,7 @@ Only if the `selector` is matching the regex, the value will be replaced.
 
 ```js
 const postcss = require('postcss');
-const replaceValuesPlugin = require('postcss-replace-values').default;
+const replaceValuesPlugin = require('postcss-replace-values');
 
 postcss()
   .use(replaceValuesPlugin({ 
