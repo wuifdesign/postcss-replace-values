@@ -1,6 +1,3 @@
-// @ts-ignore
-// @ts-ignore
-
 import * as postcss from 'postcss';
 import { conv } from "./lib/color-shorthand-hex-to-six-digit";
 const replaceAll = require('string.prototype.replaceall');
