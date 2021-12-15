@@ -26,7 +26,7 @@ export = postcss.plugin('replace-values', (options: ReplaceValuesOptions) => {
           replaceValue = conv(replaceValue);
         }
         if (replaceValue.indexOf(search) !== -1) {
-          if (replaceCssVariables && decl.prop.slice(0, 2) === '--') {
+          if (!replaceCssVariables && decl.prop.slice(0, 2) === '--') {
             return;
           }
           let value = replaceColors[checkColor];
