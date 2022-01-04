@@ -16,6 +16,13 @@ export = postcss.plugin('replace-values', (options: ReplaceValuesOptions) => {
   const replaceColors = options.values;
   const replaceColorsKeys = Object.keys(options.values);
 
+  const checkMatching = (replaceValue: string, search: string) => {
+    if (search.slice(0, 2) === '--') {
+      return replaceValue === search || replaceValue === `var(${search})`;
+    }
+    return replaceValue.indexOf(search) !== -1
+  }
+
   return (root) => {
     root.walkDecls((decl) => {
       replaceColorsKeys.some((checkColor) => {
@@ -25,7 +32,7 @@ export = postcss.plugin('replace-values', (options: ReplaceValuesOptions) => {
           search = conv(search);
           replaceValue = conv(replaceValue);
         }
-        if (replaceValue.indexOf(search) !== -1) {
+        if (checkMatching(replaceValue, search)) {
           if (!replaceCssVariables && decl.prop.slice(0, 2) === '--') {
             return;
           }

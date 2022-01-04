@@ -62,4 +62,11 @@ describe('replaceValuesPlugin', () => {
     const checkValue = await process(source, { values: { 'var(--test)': '#a00' } });
     expect(checkValue).toBe('div { --primary: #a00; } .btn { color: #a00 }');
   });
+
+  it('should not replace part of a css variable', async () => {
+    const source = 'div { color: var(--foobar); }';
+    const checkValue = await process(source, { values: { '--foo': '--boz', '--foobar': '--baz' } });
+    expect(checkValue).toBe('div { color: var(--baz); }');
+  });
+
 })
