@@ -28,9 +28,9 @@ describe('replaceValuesPlugin', () => {
   });
 
   it('should replace long hex with short hex', async () => {
-    const source = 'div { color: #000000; background: #000; invalid: #000a; }';
+    const source = 'div { color: #000000; background: #000; invalid: #000aa; }';
     const checkValue = await process(source, { values: { '#000': '#a00' } });
-    expect(checkValue).toBe('div { color: #a00; background: #a00; invalid: #000a; }');
+    expect(checkValue).toBe('div { color: #a00; background: #a00; invalid: #000aa; }');
   });
 
   it('should replace color inside string', async () => {
@@ -40,7 +40,7 @@ describe('replaceValuesPlugin', () => {
   });
 
   it('should replace multi colors inside string', async () => {
-    const source = 'div { box-shadow:inset 10px 10px 20px 10px #000, inset 10px -10px 20px 10px #000 }';
+    const source = 'div { box-shadow:inset 10px 10px 20px 10px #000, inset 10px -10px 20px 10px #000000 }';
     const checkValue = await process(source, { values: { '#000': '#a00' } });
     expect(checkValue).toBe('div { box-shadow:inset 10px 10px 20px 10px #a00, inset 10px -10px 20px 10px #a00 }');
   });
@@ -67,6 +67,18 @@ describe('replaceValuesPlugin', () => {
     const source = 'div { color: var(--foobar); }';
     const checkValue = await process(source, { values: { '--foo': '--boz', '--foobar': '--baz' } });
     expect(checkValue).toBe('div { color: var(--baz); }');
+  });
+
+  it('should support 4 digit rgba', async () => {
+    const source = 'div { color: #ffeeff; } .btn { color: #ffffeeee; } .btn-2 { color: #ffee; }';
+    const checkValue = await process(source, { values: { '#ffee': '#a00' } });
+    expect(checkValue).toBe('div { color: #ffeeff; } .btn { color: #a00; } .btn-2 { color: #a00; }');
+  });
+
+  it('should support 8 digit rgba', async () => {
+    const source = 'div { color: #ffeeff; } .btn { color: #ffffeeee; } .btn-2 { color: #ffee; }';
+    const checkValue = await process(source, { values: { '#ffffeeee': '#a00' } });
+    expect(checkValue).toBe('div { color: #ffeeff; } .btn { color: #a00; } .btn-2 { color: #a00; }');
   });
 
 })

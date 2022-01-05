@@ -28,10 +28,11 @@ export = postcss.plugin('replace-values', (options: ReplaceValuesOptions) => {
       replaceColorsKeys.some((checkColor) => {
         var search = checkColor;
         var replaceValue = decl.value;
-        if (/^#([0-9A-F]{3}){1,2}$/i.test(search)) {
+        if (/^#([0-9A-F]{3,4}){1,2}$/i.test(search)) {
           search = conv(search);
           replaceValue = conv(replaceValue);
         }
+        console.log(search, replaceValue);
         if (checkMatching(replaceValue, search)) {
           if (!replaceCssVariables && decl.prop.slice(0, 2) === '--') {
             return;

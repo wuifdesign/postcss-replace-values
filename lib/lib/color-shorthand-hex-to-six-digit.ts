@@ -25,12 +25,14 @@ function conv(originalInput: any): any {
   ) {
     if (
       string[offset - 1] !== "&" && // consider false positives like &#124;
-      hex.length === 4 &&
       hex.charAt(0) === "#"
     ) {
-      return `#${hex.charAt(1)}${hex.charAt(1)}${hex.charAt(2)}${hex.charAt(
-        2
-      )}${hex.charAt(3)}${hex.charAt(3)}`.toLowerCase();
+      if (hex.length === 4) {
+        return `#${hex.charAt(1)}${hex.charAt(1)}${hex.charAt(2)}${hex.charAt(2)}${hex.charAt(3)}${hex.charAt(3)}`.toLowerCase();
+      }
+      if (hex.length === 5) {
+        return `#${hex.charAt(1)}${hex.charAt(1)}${hex.charAt(2)}${hex.charAt(2)}${hex.charAt(3)}${hex.charAt(3)}${hex.charAt(4)}${hex.charAt(4)}`.toLowerCase();
+      }
     }
     return hex.toLowerCase();
   }
