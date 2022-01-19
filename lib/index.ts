@@ -32,7 +32,6 @@ export = postcss.plugin('replace-values', (options: ReplaceValuesOptions) => {
           search = conv(search);
           replaceValue = conv(replaceValue);
         }
-        console.log(search, replaceValue);
         if (checkMatching(replaceValue, search)) {
           if (!replaceCssVariables && decl.prop.slice(0, 2) === '--') {
             return;
