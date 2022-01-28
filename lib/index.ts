@@ -1,5 +1,6 @@
 import * as postcss from 'postcss';
-import { conv } from "./lib/color-shorthand-hex-to-six-digit";
+import { conv } from './lib/color-shorthand-hex-to-six-digit';
+
 const replaceAll = require('string.prototype.replaceall');
 
 export type ReplaceValuesOptions = {
@@ -18,10 +19,10 @@ export = postcss.plugin('replace-values', (options: ReplaceValuesOptions) => {
 
   const checkMatching = (replaceValue: string, search: string) => {
     if (search.slice(0, 2) === '--') {
-      return replaceValue === search || replaceValue === `var(${search})`;
+      return replaceValue === search || replaceValue.indexOf(`${search.replace(' ', '')})`) !== -1;
     }
-    return replaceValue.indexOf(search) !== -1
-  }
+    return replaceValue.indexOf(search) !== -1;
+  };
 
   return (root) => {
     root.walkDecls((decl) => {

@@ -81,4 +81,10 @@ describe('replaceValuesPlugin', () => {
     expect(checkValue).toBe('div { color: #ffeeff; } .btn { color: #a00; } .btn-2 { color: #a00; }');
   });
 
-})
+  it('should support replacing variables within functions', async () => {
+    const source = 'div { color: rgba(var(--color), 0.9); }';
+    const checkValue = await process(source, { values: { '--color': '--foo' } });
+    expect(checkValue).toBe('div { color: rgba(var(--foo), 0.9); }');
+  });
+
+});
