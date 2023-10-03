@@ -1,6 +1,6 @@
 {
   "name": "postcss-replace-values",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A PostCSS plugin to replace one color with another",
   "main": "dist/index.js",
   "source": "lib/index.ts",
@@ -36,5 +36,8 @@
     "postcss": "^8.4.31",
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "postcss": "^8.0.0"
   }
 }
