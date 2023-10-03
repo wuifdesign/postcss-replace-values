@@ -1,5 +1,9 @@
 # postcss-replace-values
 
+![npm](https://img.shields.io/npm/v/postcss-replace-values)
+![GitHub issues](https://img.shields.io/github/issues/wuifdesign/postcss-replace-values)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/wuifdesign/postcss-replace-values/lint-and-test.yml)
+
 ## Install
 
 ```
