@@ -3,8 +3,12 @@
 ## Install
 
 ```
-npm install --save postcss-replace-values
+npm install --save postcss postcss-replace-values
 ```
+
+## Upgrade from v2 to v3
+
+You now need to install `postcss` as a dependency in your project. This allows to update this on your own.
 
 ## Simple Usage
 

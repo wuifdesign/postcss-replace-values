@@ -1,53 +1,53 @@
-import * as postcss from 'postcss';
-import { conv } from './lib/color-shorthand-hex-to-six-digit';
-
-const replaceAll = require('string.prototype.replaceall');
+import { conv } from './lib/color-shorthand-hex-to-six-digit'
+import replaceAll from 'string.prototype.replaceall'
+import { AcceptedPlugin } from 'postcss'
 
 export type ReplaceValuesOptions = {
   values: { [key: string]: string | { value: string, selector: RegExp } }
   replaceCssVariables?: boolean
 }
 
-// @ts-ignore
-export = postcss.plugin('replace-values', (options: ReplaceValuesOptions) => {
+const plugin = (options: ReplaceValuesOptions): AcceptedPlugin => {
   if (!options || !options.values) {
-    throw new Error('Required options is missing');
+    throw new Error('Required options is missing')
   }
-  const replaceCssVariables = typeof options.replaceCssVariables === 'undefined' ? true : options.replaceCssVariables;
-  const replaceColors = options.values;
-  const replaceColorsKeys = Object.keys(options.values);
+  const replaceCssVariables = typeof options.replaceCssVariables === 'undefined' ? true : options.replaceCssVariables
+  const replaceColors = options.values
+  const replaceColorsKeys = Object.keys(options.values)
 
   const checkMatching = (replaceValue: string, search: string) => {
     if (search.slice(0, 2) === '--') {
-      return replaceValue === search || replaceValue.indexOf(`${search.replace(' ', '')})`) !== -1;
+      return replaceValue === search || replaceValue.indexOf(`${search.replace(' ', '')})`) !== -1
     }
-    return replaceValue.indexOf(search) !== -1;
-  };
-
-  return (root) => {
-    root.walkDecls((decl) => {
+    return replaceValue.indexOf(search) !== -1
+  }
+  return {
+    postcssPlugin: 'replace-values',
+    Declaration(decl) {
       replaceColorsKeys.some((checkColor) => {
-        var search = checkColor;
-        var replaceValue = decl.value;
+        let search = checkColor
+        let replaceValue = decl.value
         if (/^#([0-9A-F]{3,4}){1,2}$/i.test(search)) {
-          search = conv(search);
-          replaceValue = conv(replaceValue);
+          search = conv(search)
+          replaceValue = conv(replaceValue)
         }
         if (checkMatching(replaceValue, search)) {
           if (!replaceCssVariables && decl.prop.slice(0, 2) === '--') {
-            return;
+            return
           }
-          let value = replaceColors[checkColor];
+          let value = replaceColors[checkColor]
           if (typeof value !== 'string') {
-            const selector = (decl.parent as any).selector;
+            const selector = (decl.parent as any).selector
             if (!new RegExp(value.selector).test(selector)) {
-              return;
+              return
             }
-            value = value.value;
+            value = value.value
           }
-          decl.value = replaceAll(replaceValue, search, value);
+          decl.value = replaceAll(replaceValue, search, value)
         }
-      });
-    });
-  };
-});
+      })
+    }
+  }
+}
+
+export default plugin

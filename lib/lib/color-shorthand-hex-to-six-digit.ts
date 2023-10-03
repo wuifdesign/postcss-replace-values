@@ -1,18 +1,15 @@
-/* eslint @typescript-eslint/explicit-module-boundary-types: 0 */
+import r from 'hex-color-regex'
+import isPlainObject from 'lodash.isplainobject'
+import clone from 'lodash.clonedeep'
 
-// Copied to here as import is not working
 // https://github.com/codsen/codsen/blob/main/packages/color-shorthand-hex-to-six-digit/src/main.ts
-
-const r = require("hex-color-regex");
-const isPlainObject = require("lodash.isplainobject");
-const clone = require("lodash.clonedeep");
 
 /**
  * Convert shorthand hex color codes into full
  */
 function conv(originalInput: any): any {
   // prevent any input argument mutation:
-  let input = clone(originalInput);
+  let input = clone(originalInput)
 
   // f's
   // ====================
@@ -24,36 +21,36 @@ function conv(originalInput: any): any {
     string: string
   ) {
     if (
-      string[offset - 1] !== "&" && // consider false positives like &#124;
-      hex.charAt(0) === "#"
+      string[offset - 1] !== '&' && // consider false positives like &#124;
+      hex.charAt(0) === '#'
     ) {
       if (hex.length === 4) {
-        return `#${hex.charAt(1)}${hex.charAt(1)}${hex.charAt(2)}${hex.charAt(2)}${hex.charAt(3)}${hex.charAt(3)}`.toLowerCase();
+        return `#${hex.charAt(1)}${hex.charAt(1)}${hex.charAt(2)}${hex.charAt(2)}${hex.charAt(3)}${hex.charAt(3)}`.toLowerCase()
       }
       if (hex.length === 5) {
-        return `#${hex.charAt(1)}${hex.charAt(1)}${hex.charAt(2)}${hex.charAt(2)}${hex.charAt(3)}${hex.charAt(3)}${hex.charAt(4)}${hex.charAt(4)}`.toLowerCase();
+        return `#${hex.charAt(1)}${hex.charAt(1)}${hex.charAt(2)}${hex.charAt(2)}${hex.charAt(3)}${hex.charAt(3)}${hex.charAt(4)}${hex.charAt(4)}`.toLowerCase()
       }
     }
-    return hex.toLowerCase();
+    return hex.toLowerCase()
   }
 
   // action
   // ====================
 
-  if (typeof originalInput === "string") {
-    input = input.replace(r(), toFullHex);
+  if (typeof originalInput === 'string') {
+    input = input.replace(r(), toFullHex)
   } else if (Array.isArray(input)) {
     for (let i = 0, len = input.length; i < len; i++) {
-      input[i] = conv(input[i]);
+      input[i] = conv(input[i])
     }
   } else if (isPlainObject(originalInput)) {
     Object.keys(input).forEach((key) => {
-      input[key] = conv(input[key]);
-    });
+      input[key] = conv(input[key])
+    })
   } else {
-    return originalInput;
+    return originalInput
   }
-  return input;
+  return input
 }
 
-export { conv };
+export { conv }
