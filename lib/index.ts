@@ -1,6 +1,7 @@
 import { conv } from './lib/color-shorthand-hex-to-six-digit'
-import replaceAll from 'string.prototype.replaceall'
 import { AcceptedPlugin } from 'postcss'
+
+const replaceAll = require('string.prototype.replaceall');
 
 export type ReplaceValuesOptions = {
   values: { [key: string]: string | { value: string, selector: RegExp } }

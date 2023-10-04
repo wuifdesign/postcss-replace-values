@@ -1,8 +1,11 @@
-import r from 'hex-color-regex'
-import isPlainObject from 'lodash.isplainobject'
-import clone from 'lodash.clonedeep'
+/* eslint @typescript-eslint/explicit-module-boundary-types: 0 */
 
+// Copied to here as import is not working
 // https://github.com/codsen/codsen/blob/main/packages/color-shorthand-hex-to-six-digit/src/main.ts
+
+const r = require('hex-color-regex')
+const isPlainObject = require('lodash.isplainobject')
+const clone = require('lodash.clonedeep')
 
 /**
  * Convert shorthand hex color codes into full

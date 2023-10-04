@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "name": "example",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "postcss": "^8.4.31",
+    "postcss-replace-values": "^3.0.1"
+  }
+}
