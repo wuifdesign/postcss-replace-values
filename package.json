@@ -1,43 +1,70 @@
 {
   "name": "postcss-replace-values",
-  "version": "3.0.2",
-  "description": "A PostCSS plugin to replace one color with another",
-  "main": "dist/index.js",
-  "source": "lib/index.ts",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist/*",
-    "lib/*"
+  "version": "4.0.0",
+  "description": "PostCSS plugin to replace values like colors and CSS variables in declarations, with shorthand hex matching and optional selector filters",
+  "keywords": [
+    "postcss",
+    "postcss-plugin",
+    "color",
+    "replace",
+    "css-variables"
   ],
-  "scripts": {
-    "build": "tsc lib/index.ts --declaration --outDir dist --skipLibCheck",
-    "test": "jest"
+  "homepage": "https://github.com/wuifdesign/postcss-replace-values",
+  "bugs": {
+    "url": "https://github.com/wuifdesign/postcss-replace-values/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:wuifdesign/postcss-replace-values.git"
+    "url": "git+https://github.com/wuifdesign/postcss-replace-values.git"
   },
-  "keywords": [
-    "postcss",
-    "color",
-    "replace"
-  ],
   "license": "MIT",
-  "homepage": "https://github.com/wuifdesign/postcss-replace-values",
-  "dependencies": {
-    "color-shorthand-hex-to-six-digit": "^5.0.13",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.isplainobject": "^4.0.6",
-    "string.prototype.replaceall": "^1.0.8"
+  "author": "WuifDesign",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
   },
-  "devDependencies": {
-    "@types/jest": "^29.5.5",
-    "jest": "^29.7.0",
-    "postcss": "^8.4.31",
-    "ts-jest": "^29.1.1",
-    "typescript": "^5.2.2"
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "sbx": "sbx run --name claude-postcss-replace-values",
+    "build": "tsdown --config-loader native",
+    "typecheck": "tsc",
+    "lint": "oxlint --deny-warnings",
+    "lint:fix": "oxlint --deny-warnings --fix",
+    "test": "vitest run",
+    "lint:package": "publint --strict",
+    "prepublishOnly": "npm run typecheck && npm run lint && npm run build && npm test"
   },
   "peerDependencies": {
     "postcss": "^8.0.0"
+  },
+  "devDependencies": {
+    "oxlint": "^1.89.0",
+    "postcss": "^8.5.31",
+    "publint": "^0.3.25",
+    "tsdown": "^0.23.1",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
+  },
+  "volta": {
+    "node": "24.22.1"
   }
 }
